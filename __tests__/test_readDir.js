@@ -14,6 +14,6 @@ function readFile(filedir, filename) {
 test('fileFor', () => {
     return fileFor(filePath, /(.vue|.js)$/, readFile)
         .then(data => {
-            expect(data).toBe('fileFor execute over!')
+            expect(data).toBe(200)
         })
 });

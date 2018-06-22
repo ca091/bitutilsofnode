@@ -10,12 +10,13 @@ async function fileFor(filePath, matching, callback) {
         let filedir = path.join(filePath, filename);
         let stats = await stat(filedir);
         if(stats.isFile() && filedir.match(matching)){
-            await callback(filedir, filename)
+            let result = await callback(filedir, filename);
+            if(result !== undefined) return result;
         }else if(stats.isDirectory()){
             await fileFor(filedir, matching, callback)
         }
     }
-    return 'fileFor execute over!'
+    return 200
 }
 
 module.exports = fileFor;
