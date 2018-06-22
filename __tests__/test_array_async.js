@@ -5,6 +5,10 @@ async function itemHandler(item) {
     return getData(item);
 }
 
+async function reduceHandler(total, item) {
+    return await total + item
+}
+
 function getData(item){
     console.log(`${item} * 2 = ?`);
     return new Promise((resolve, reject) => {
@@ -36,5 +40,15 @@ describe('array_async forMap', () => {
                 expect(data).toContain(2);
             })
             .catch(e => expect(e.message).toMatch('itemHandler should be function!'));
+    });
+});
+
+describe('array_async forReduce', () => {
+    test('return promise', () => {
+        // arr.reduce(reduceHandler, 0).then(d => console.log(d))
+        return ArrayAsync.forReduce(arr, reduceHandler)
+            .then(data => {
+                console.log(`forReduce result = ${data}`);
+            })
     });
 });
