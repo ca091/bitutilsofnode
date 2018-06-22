@@ -2,6 +2,7 @@
 *.iml
 node_modules
 yarn.lock
+out.txt
 
 __tests__
 .gitignore
