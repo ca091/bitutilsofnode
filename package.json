@@ -1,0 +1,14 @@
+{
+  "name": "bitutilsofnode",
+  "version": "1.0.0",
+  "description": "some bit utils of node",
+  "main": "index.js",
+  "author": "erluzi",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^23.1.0"
+  }
+}
