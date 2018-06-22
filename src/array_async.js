@@ -15,6 +15,14 @@ async function forReduce(arr, reduceHandler){
     return arr.reduce(reduceHandler, 0);
 }
 
+async function forSome(arr, callback) {
+    if(typeof callback !== 'function') throw new Error(`callback should be function!`);
+    for (let [index, item] of Object.entries(arr)) {
+        if(await callback(item, index, arr)) return true;
+    }
+    return false
+}
+
 /**
  * 不同于forMap, forOf是异步按顺序执行
  * @param arr
@@ -32,5 +40,6 @@ async function forOf(arr, callback) {
 module.exports = {
     forMap,
     forReduce,
+    forSome,
     forOf
 };

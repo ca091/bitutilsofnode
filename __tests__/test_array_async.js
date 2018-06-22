@@ -2,7 +2,7 @@ let ArrayAsync = require('../src/array_async');
 
 let arr = [1, 2, 3];
 
-function mapItemHandler(item){
+function mapHandler(item){
     return new Promise((resolve, reject) => {
         let delay = item === 1 ? 3000 : (item - 1) * 1000;
         setTimeout(() => {
@@ -15,7 +15,7 @@ async function reduceHandler(total, item) {
     return await total + item
 }
 
-function ofItemHandler(item, index, context) {
+function ofHandler(item, index, context) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve(`ofItemHandler result: ${item}`)
@@ -26,13 +26,11 @@ function ofItemHandler(item, index, context) {
 //测试单元
 describe('array_async forMap', () => {
     test('return array', () => {
-        expect.assertions(3);
-        return ArrayAsync.forMap(arr, mapItemHandler)
+        expect.assertions(2);
+        return ArrayAsync.forMap(arr, mapHandler)
             .then(data => {
-                console.log(`forMap result = ${data}`);
+                expect(data).toEqual([2,4,6]);
                 expect(data).toContain(2);
-                expect(data).toContain(4);
-                expect(data).toContain(6);
             })
     });
 
@@ -50,11 +48,31 @@ describe('array_async forReduce', () => {
         // arr.reduce(reduceHandler, 0).then(d => console.log(d))
         return ArrayAsync.forReduce(arr, reduceHandler)
             .then(data => {
-                console.log(`forReduce result = ${data}`);
+                expect(data).toBe(1+2+3)
             })
     });
 });
 
+describe('array_async forSome', () => {
+    test('return true', () => {
+        return ArrayAsync.forSome(arr, async item => item === 2)
+            .then(data => {
+                expect(data).toBeTruthy()
+            })
+    });
+
+    test('return false', () => {
+        return ArrayAsync.forSome(arr, async item => item === 4)
+            .then(data => {
+                expect(data).toBeFalsy()
+            })
+    });
+});
+
+
 test('forOf', () => {
-    return ArrayAsync.forOf(arr, ofItemHandler).then(data => console.log(`forOf result = ${data}`))
+    return ArrayAsync.forOf(arr, ofHandler)
+        .then(data => {
+            expect(data).toBe('execute over')
+        })
 });
