@@ -2,7 +2,7 @@ let ArrayAsync = require('../src/array_async');
 
 let arr = [1, 2, 3];
 
-function mapHandler(item){
+function mapHandler(item) {
     return new Promise((resolve, reject) => {
         let delay = item === 1 ? 3000 : (item - 1) * 1000;
         setTimeout(() => {
@@ -29,7 +29,7 @@ describe('array_async forMap', () => {
         expect.assertions(2);
         return ArrayAsync.forMap(arr, mapHandler)
             .then(data => {
-                expect(data).toEqual([2,4,6]);
+                expect(data).toEqual([2, 4, 6]);
                 expect(data).toContain(2);
             })
     });
@@ -48,7 +48,7 @@ describe('array_async forReduce', () => {
         // arr.reduce(reduceHandler, 0).then(d => console.log(d))
         return ArrayAsync.forReduce(arr, reduceHandler)
             .then(data => {
-                expect(data).toBe(1+2+3)
+                expect(data).toBe(1 + 2 + 3)
             })
     });
 });
