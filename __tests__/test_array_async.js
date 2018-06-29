@@ -1,4 +1,4 @@
-let ArrayAsync = require('../src/array_async');
+let ArrayAsync = require('../index').ArrayAsync;
 
 let arr = [1, 2, 3];
 
@@ -73,6 +73,6 @@ describe('array_async forSome', () => {
 test('forOf', () => {
     return ArrayAsync.forOf(arr, ofHandler)
         .then(data => {
-            expect(data).toBe('execute over')
+            expect(data).toBe(200)
         })
 });

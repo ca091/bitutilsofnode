@@ -1,6 +1,7 @@
 let fs = require('fs');
 let path = require('path');
-let fileFor = require('../src/readDir');
+let fileFor = require('../index').fileFor;
+
 
 let filePath = path.resolve(__dirname, '../src');
 let outPut = 'out.txt';

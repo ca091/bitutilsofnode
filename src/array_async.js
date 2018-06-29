@@ -27,14 +27,14 @@ async function forSome(arr, callback) {
  * 不同于forMap, forOf是异步按顺序执行
  * @param arr
  * @param callback
- * @returns {Promise<string>}
+ * @returns {Promise<number>}
  */
 async function forOf(arr, callback) {
     if (typeof callback !== 'function') throw new Error(`callback should be function!`);
     for (let [index, item] of Object.entries(arr)) {
         await callback(item, index, arr)
     }
-    return 'execute over';
+    return 200;
 }
 
 module.exports = {
