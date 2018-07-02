@@ -10,3 +10,11 @@ ArrayAsync: {
    forOf 
 }
 ```
+
+- 接口调用
+```javascript
+Api: {
+    get
+    request
+}
+```
