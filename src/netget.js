@@ -7,9 +7,7 @@ function getData(res) {
   return new Promise((resolve, reject) => {
     res.setEncoding('utf8')
     let rawData = ''
-    res.on('data', chunk => {
-      rawData += chunk
-    })
+    res.on('data', chunk => rawData += chunk)
     res.on('end', () => {
       try {
         resolve(JSON.parse(rawData))
